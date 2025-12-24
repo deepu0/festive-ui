@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festive UI v2.0 - All 14 Effects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem 0;
+            color: #FFD700;
+        }
+
+        .effect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .effect-btn {
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .effect-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .effect-btn.active {
+            background: rgba(168, 218, 220, 0.4);
+            border-color: rgba(168, 218, 220, 0.8);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .metrics {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Monaco', monospace;
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric {
+            display: inline-block;
+            margin-right: 1.5rem;
+        }
+
+        .intensity-controls {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .intensity-btn {
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .intensity-btn.active {
+            background: rgba(168, 218, 220, 0.3);
+            border-color: rgba(168, 218, 220, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎉 Festive UI v2.0 Engine</h1>
+        <p class="subtitle">All 14 Effects | Object Pooling | Performance Optimized</p>
+
+        <div class="controls">
+            <h2 class="section-title">Original Effects (4)</h2>
+            <div class="effect-grid">
+                <button class="effect-btn" data-effect="snow">❄️ Snow</button>
+                <button class="effect-btn" data-effect="confetti">🎉 Confetti</button>
+                <button class="effect-btn" data-effect="hearts">❤️ Hearts</button>
+                <button class="effect-btn" data-effect="sparkles">✨ Sparkles</button>
+            </div>
+
+            <h2 class="section-title">General Festive (5)</h2>
+            <div class="effect-grid">
+                <button class="effect-btn" data-effect="fireworks">🎆 Fireworks</button>
+                <button class="effect-btn" data-effect="autumnLeaves">🍂 Leaves</button>
+                <button class="effect-btn" data-effect="balloons">🎈 Balloons</button>
+                <button class="effect-btn" data-effect=" stars">⭐ Stars</button>
+                <button class="effect-btn" data-effect="bubbles">🫧 Bubbles</button>
+            </div>
+
+            <h2 class="section-title">Indian Festivals (5)</h2>
+            <div class="effect-grid">
+                <button class="effect-btn" data-effect="gulaal">🎨 Gulaal</button>
+                <button class="effect-btn" data-effect="diyas">🪔 Diyas</button>
+                <button class="effect-btn" data-effect="flowerShower">🌺 Flowers</button>
+                <button class="effect-btn" data-effect="chakri">🎇 Chakri</button>
+                <button class="effect-btn" data-effect="skyLanterns">🏮 Lanterns</button>
+            </div>
+
+            <h2 class="section-title">Global Intensity</h2>
+            <div class="intensity-controls">
+                <button class="intensity-btn" data-intensity="low">Low</button>
+                <button class="intensity-btn active" data-intensity="medium">Medium</button>
+                <button class="intensity-btn" data-intensity="high">High</button>
+            </div>
+
+            <div class="metrics" id="metrics">
+                <span class="metric">Particles: <strong id="particles">0</strong></span>
+                <span class="metric">FPS: <strong id="fps">0</strong></span>
+                <span class="metric">Frame Time: <strong id="frametime">0ms</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+    import {
+      snow, confetti, hearts, sparkles, fireworks, stars, bubbles,
+      autumnLeaves, balloons, gulaal, diyas, flowerShower, chakri, skyLanterns,
+ParticleEngine
+    } from '../dist/index.esm.js';
+
+    const effects = {
+      snow: { fn: snow, instance: null },
+      confetti: { fn: confetti, instance: null },
+      hearts: { fn: hearts, instance: null },
+      sparkles: { fn: sparkles, instance: null },
+      fireworks: { fn: fireworks, instance: null },
+      stars: { fn: stars, instance: null },
+      bubbles: { fn: bubbles, instance: null },
+      autumnLeaves: { fn: autumnLeaves, instance: null },
+      balloons: { fn: balloons, instance: null },
+      gulaal: { fn: gulaal, instance: null },
+      diyas: { fn: diyas, instance: null },
+      flowerShower: { fn: flowerShower, instance: null },
+      chakri: { fn: chakri, instance: null },
+      skyLanterns: { fn: skyLanterns, instance: null },
+    };
+
+    let currentIntensity = 'medium';
+
+    // Effect toggles
+    document.querySelectorAll('.effect-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const effectName = btn.dataset.effect;
+        const effect = effects[effectName];
+
+        if (!effect) return;
+
+        if (effect.instance) {
+          effect.instance();
+          effect.instance = null;
+          btn.classList.remove('active');
+        } else {
+          effect.instance = effect.fn({ intensity: currentIntensity });
+          btn.classList.add('active');
+        }
+      });
+    });
+
+    // Intensity controls
+    document.querySelectorAll('.intensity-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentIntensity = btn.dataset.intensity;
+        
+        document.querySelectorAll('.intensity-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Restart active effects
+        Object.entries(effects).forEach(([name, effect]) => {
+          if (effect.instance) {
+            effect.instance();
+            effect.instance = effect.fn({ intensity: currentIntensity });
+          }
+        });
+      });
+    });
+
+    // Performance monitoring (pseudo - would connect to real engine metrics)
+    setInterval(() => {
+      document.getElementById('particles').textContent = Math.floor(Math.random() * 60);
+      document.getElementById('fps').textContent = 60;
+      document.getElementById('frametime').textContent = (5 + Math.random() * 3).toFixed(1);
+    }, 1000);
+    </script>
+</body>
+
+</html>

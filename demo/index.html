@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Festive UI - Snow Effect Demo</title>
+  <title>Festive UI - Seasonal Effects Library (14 Effects)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,223 +16,551 @@
     }
 
     body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 2rem;
+      color: #fff;
     }
 
     .container {
-      max-width: 1200px;
-      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
     }
 
     h1 {
-      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 1rem;
-      text-align: center;
-      background: linear-gradient(135deg, #fff 0%, #a8dadc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
-    p {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      text-align: center;
-      margin-bottom: 3rem;
+    .tagline {
+      font-size: 1.25rem;
       opacity: 0.9;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      font-weight: 400;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.05);
+    .bundle-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    .category-label {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin: 1.5rem 0 0.5rem 0.5rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem;
+      border-radius: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      flex: 1;
+      min-width: 130px;
+      padding: 0.875rem 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .tab:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .tab.active {
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .effect-panel {
+      display: none;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
       border-radius: 16px;
       padding: 2rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    .effect-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
     }
 
-    .card h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.75rem;
-      color: #a8dadc;
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .card p {
-      font-size: 1rem;
-      opacity: 0.8;
-      text-align: left;
-      margin: 0;
+    .effect-header {
+      margin-bottom: 2rem;
+    }
+
+    .effect-header h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .effect-description {
+      opacity: 0.9;
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
     .controls {
       display: flex;
       gap: 1rem;
-      justify-content: center;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
-      margin-bottom: 2rem;
     }
 
-    button {
-      padding: 0.75rem 2rem;
-      font-size: 1rem;
+    .btn {
+      padding: 0.875rem 1.5rem;
       border: none;
       border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      font-weight: 600;
+      font-family: 'Inter', sans-serif;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #457b9d 0%, #1d3557 100%);
-      color: #fff;
+      background: #fff;
+      color: #667eea;
     }
 
     .btn-primary:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 16px rgba(69, 123, 157, 0.4);
+      background: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.2);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.3);
     }
 
-    .stats {
-      text-align: center;
+    .intensity-group {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-intensity {
+      padding: 0.75rem 1.25rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border-radius: 8px;
       font-size: 0.875rem;
-      opacity: 0.6;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
     }
 
-    .info {
-      background: rgba(168, 218, 220, 0.1);
-      border-left: 3px solid #a8dadc;
-      padding: 1rem;
-      border-radius: 4px;
-      margin-top: 2rem;
+    .btn-intensity:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
-    .info p {
-      text-align: left;
-      margin: 0;
-      font-size: 0.9rem;
+    .btn-intensity.active {
+      background: rgba(168, 218, 220, 0.3);
+      border-color: rgba(168, 218, 220, 0.6);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .tabs {
+        flex-direction: column;
+      }
+
+      .tab {
+        min-width: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="container">
-    <h1>Build your ideas with Festive UI</h1>
-    <p>Lightweight, production-safe seasonal UI effects that delight without compromise</p>
+    <header>
+      <h1>🎉 Festive UI</h1>
+      <p class="tagline">Complete seasonal effects library for modern web apps</p>
+      <div class="bundle-badge">14 Effects • Lightweight & Production-Ready</div>
+    </header>
 
-    <div class="controls">
-      <button class="btn-primary" id="toggleSnow">Start Snow Effect</button>
-      <button class="btn-secondary" id="changeLow">Low Intensity</button>
-      <button class="btn-secondary" id="changeMedium">Medium Intensity</button>
-      <button class="btn-secondary" id="changeHigh">High Intensity</button>
+    <div class="category-label">Original Effects</div>
+    <div class="tabs">
+      <button class="tab active" data-effect="snow">❄️ Snow</button>
+      <button class="tab" data-effect="confetti">🎉 Confetti</button>
+      <button class="tab" data-effect="hearts">❤️ Hearts</button>
+      <button class="tab" data-effect="sparkles">✨ Sparkles</button>
     </div>
 
-    <div class="cards">
-      <div class="card">
-        <h2>🎯 Performance First</h2>
-        <p>CSS-only animations. 60 FPS. No layout shifts. Under 1kb gzipped.</p>
+    <div class="category-label">General Festive</div>
+    <div class="tabs">
+      <button class="tab" data-effect="fireworks">🎆 Fireworks</button>
+      <button class="tab" data-effect="autumn-leaves">🍂 Leaves</button>
+      <button class="tab" data-effect="balloons">🎈 Balloons</button>
+      <button class="tab" data-effect="stars">⭐ Stars</button>
+      <button class="tab" data-effect="bubbles">🫧 Bubbles</button>
+    </div>
+
+    <div class="category-label">Indian Festivals</div>
+    <div class="tabs">
+      <button class="tab" data-effect="gulaal">🎨 Gulaal</button>
+      <button class="tab" data-effect="diyas">🪔 Diyas</button>
+      <button class="tab" data-effect="flower-shower">🌺 Flowers</button>
+      <button class="tab" data-effect="chakri">🎇 Chakri</button>
+      <button class="tab" data-effect="sky-lanterns">🏮 Lanterns</button>
+    </div>
+
+    <!-- Effect Panels (simplified for brevity) -->
+    <div class="effect-panel active" id="snow-panel">
+      <div class="effect-header">
+        <h2>❄️ Snow Effect</h2>
+        <p class="effect-description">Gentle snowfall for winter themes and holidays.</p>
       </div>
-
-      <div class="card">
-        <h2>♿️ Accessible</h2>
-        <p>Automatically respects prefers-reduced-motion. No screen reader interference.</p>
-      </div>
-
-      <div class="card">
-        <h2>⚡️ Zero Config</h2>
-        <p>Works out of the box. One line of code. No build step required.</p>
+      <div class="controls">
+        <button class="btn btn-primary" id="snow-toggle">Start Snow</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
       </div>
     </div>
 
-    <div class="info">
-      <p><strong>About this demo:</strong> This page demonstrates the snow effect from festive-ui. The effect overlays subtle white particles that fall with a gentle horizontal drift. Try different intensities or toggle the effect on/off.</p>
+    <div class="effect-panel" id="confetti-panel">
+      <div class="effect-header">
+        <h2>🎉 Confetti Effect</h2>
+        <p class="effect-description">Celebratory confetti burst for achievements and celebrations.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="confetti-toggle">Launch Confetti</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
     </div>
 
-    <div class="stats">
-      <p>Bundle Size: 931 bytes gzipped | Powered by festive-ui</p>
+    <div class="effect-panel" id="hearts-panel">
+      <div class="effect-header">
+        <h2>❤️ Hearts Effect</h2>
+        <p class="effect-description">Romantic floating hearts for Valentine's Day and love themes.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="hearts-toggle">Float Hearts</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
     </div>
+
+    <div class="effect-panel" id="sparkles-panel">
+      <div class="effect-header">
+        <h2>✨ Sparkles Effect</h2>
+        <p class="effect-description">Magical twinkling sparkles for premium experiences.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="sparkles-toggle">Add Sparkles</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-panel" id="fireworks-panel">
+      <div class="effect-header">
+        <h2>🎆 Fireworks Effect</h2>
+        <p class="effect-description">Explosive fireworks bursts for New Year's and celebrations.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="fireworks-toggle">Launch Fireworks</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-panel" id="autumn-leaves-panel">
+      <div class="effect-header">
+        <h2>🍂 Autumn Leaves Effect</h2>
+        <p class="effect-description">Falling autumn leaves for fall and Thanksgiving themes.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="autumn-leaves-toggle">Start Leaves</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-panel" id="balloons-panel">
+      <div class="effect-header">
+        <h2>🎈 Balloons Effect</h2>
+        <p class="effect-description">Floating balloons for birthdays and parties. Click to pop!</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="balloons-toggle">Float Balloons</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-panel" id="stars-panel">
+      <div class="effect-header">
+        <h2>⭐ Twinkling Stars Effect</h2>
+        <p class="effect-description">Magical twinkling stars for night and space themes.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="stars-toggle">Show Stars</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-panel" id="bubbles-panel">
+      <div class="effect-header">
+        <h2>🫧 Bubbles Effect</h2>
+        <p class="effect-description">Floating bubbles with shimmer. Click to pop!</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="bubbles-toggle">Float Bubbles</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-panel" id="gulaal-panel">
+      <div class="effect-header">
+        <h2>🎨 Gulaal Effect (Holi)</h2>
+        <p class="effect-description">Colored powder bursts for Holi celebrations.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="gulaal-toggle">Celebrate Holi</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-panel" id="diyas-panel">
+      <div class="effect-header">
+        <h2>🪔 Diyas Effect (Diwali)</h2>
+        <p class="effect-description">Flickering oil lamps for Diwali celebrations.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="diyas-toggle">Light Diyas</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-panel" id="flower-shower-panel">
+      <div class="effect-header">
+        <h2>🌺 Flower Shower Effect</h2>
+        <p class="effect-description">Falling flower petals for pujas and weddings.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="flower-shower-toggle">Shower Flowers</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-panel" id="chakri-panel">
+      <div class="effect-header">
+        <h2>🎇 Chakri Effect (Diwali)</h2>
+        <p class="effect-description">Spinning fireworks sparklers for Diwali.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="chakri-toggle">Spin Chakri</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-panel" id="sky-lanterns-panel">
+      <div class="effect-header">
+        <h2>🏮 Sky Lanterns Effect</h2>
+        <p class="effect-description">Glowing floating lanterns for festivals.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="sky-lanterns-toggle">Float Lanterns</button>
+        <div class="intensity-group">
+          <button class="btn-intensity" data-intensity="low">Low</button>
+          <button class="btn-intensity active" data-intensity="medium">Medium</button>
+          <button class="btn-intensity" data-intensity="high">High</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Built with ❤️ using Canvas • MIT Licensed • 14 Effects</p>
+    </footer>
   </div>
 
   <script type="module">
-    import { snow } from '../dist/index.esm.js';
+    // Import all effects
+    import { snow, confetti, hearts, sparkles, fireworks, autumnLeaves, balloons, stars, bubbles, gulaal, diyas, flowerShower, chakri, skyLanterns } from '../dist/index.esm.js';
 
-    let cleanup = null;
-    let isActive = false;
-    let currentIntensity = 'medium';
+    const effects = {
+      snow: { fn: snow, cleanup: null, active: false, intensity: 'medium' },
+      confetti: { fn: confetti, cleanup: null, active: false, intensity: 'medium' },
+      hearts: { fn: hearts, cleanup: null, active: false, intensity: 'medium' },
+      sparkles: { fn: sparkles, cleanup: null, active: false, intensity: 'medium' },
+      fireworks: { fn: fireworks, cleanup: null, active: false, intensity: 'medium' },
+      'autumn-leaves': { fn: autumnLeaves, cleanup: null, active: false, intensity: 'medium' },
+      balloons: { fn: balloons, cleanup: null, active: false, intensity: 'medium' },
+      stars: { fn: stars, cleanup: null, active: false, intensity: 'medium' },
+      bubbles: { fn: bubbles, cleanup: null, active: false, intensity: 'medium' },
+      gulaal: { fn: gulaal, cleanup: null, active: false, intensity: 'medium' },
+      diyas: { fn: diyas, cleanup: null, active: false, intensity: 'medium' },
+      'flower-shower': { fn: flowerShower, cleanup: null, active: false, intensity: 'medium' },
+      chakri: { fn: chakri, cleanup: null, active: false, intensity: 'medium' },
+      'sky-lanterns': { fn: skyLanterns, cleanup: null, active: false, intensity: 'medium' },
+    };
 
-    const toggleBtn = document.getElementById('toggleSnow');
-    const lowBtn = document.getElementById('changeLow');
-    const mediumBtn = document.getElementById('changeMedium');
-    const highBtn = document.getElementById('changeHigh');
-
-    function updateSnow(intensity) {
-      if (cleanup) {
-        cleanup();
-      }
-      if (isActive) {
-        cleanup = snow({ intensity });
-      }
-      currentIntensity = intensity;
-      
-      // Visual feedback
-      [lowBtn, mediumBtn, highBtn].forEach(btn => btn.style.background = 'rgba(255, 255, 255, 0.1)');
-      if (intensity === 'low') lowBtn.style.background = 'rgba(168, 218, 220, 0.3)';
-      if (intensity === 'medium') mediumBtn.style.background = 'rgba(168, 218, 220, 0.3)';
-      if (intensity === 'high') highBtn.style.background = 'rgba(168, 218, 220, 0.3)';
-    }
-
-    toggleBtn.addEventListener('click', () => {
-      isActive = !isActive;
-      if (isActive) {
-        cleanup = snow({ intensity: currentIntensity });
-        toggleBtn.textContent = 'Stop Snow Effect';
-        toggleBtn.classList.remove('btn-primary');
-        toggleBtn.classList.add('btn-secondary');
-      } else {
-        if (cleanup) cleanup();
-        cleanup = null;
-        toggleBtn.textContent = 'Start Snow Effect';
-        toggleBtn.classList.remove('btn-secondary');
-        toggleBtn.classList.add('btn-primary');
-      }
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const effectName = tab.dataset.effect;
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('.effect-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(`${effectName}-panel`).classList.add('active');
+      });
     });
 
-    lowBtn.addEventListener('click', () => updateSnow('low'));
-    mediumBtn.addEventListener('click', () => updateSnow('medium'));
-    highBtn.addEventListener('click', () => updateSnow('high'));
+    // Setup effect controls
+    Object.keys(effects).forEach(effectName => {
+      const toggle = document.getElementById(`${effectName}-toggle`);
+      const panel = document.getElementById(`${effectName}-panel`);
 
-    // Initialize
-    updateSnow('medium');
+      if (!toggle || !panel) return;
+
+      // Toggle button
+      toggle.addEventListener('click', () => {
+        const effect = effects[effectName];
+        effect.active = !effect.active;
+
+        if (effect.active) {
+          effect.cleanup = effect.fn({ intensity: effect.intensity });
+          toggle.textContent = toggle.textContent.replace(/Start |Launch |Float |Add |Show |Light |Shower |Spin |Celebrate /, 'Stop ');
+          toggle.classList.remove('btn-primary');
+          toggle.classList.add('btn-secondary');
+        } else {
+          if (effect.cleanup) effect.cleanup();
+          effect.cleanup = null;
+          const originalText = toggle.textContent.replace('Stop ', '');
+          const verbs = { snow: 'Start', confetti: 'Launch', hearts: 'Float', sparkles: 'Add', fireworks: 'Launch', 'autumn-leaves': 'Start', balloons: 'Float', stars: 'Show', bubbles: 'Float', gulaal: 'Celebrate', diyas: 'Light', 'flower-shower': 'Shower', chakri: 'Spin', 'sky-lanterns': 'Float' };
+          toggle.textContent = (verbs[effectName] || 'Start') + ' ' + originalText;
+          toggle.classList.remove('btn-secondary');
+          toggle.classList.add('btn-primary');
+        }
+      });
+
+      // Intensity controls
+      panel.querySelectorAll('.btn-intensity').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const intensity = btn.dataset.intensity;
+          effects[effectName].intensity = intensity;
+          panel.querySelectorAll('.btn-intensity').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          if (effects[effectName].active) {
+            if (effects[effectName].cleanup) effects[effectName].cleanup();
+            effects[effectName].cleanup = effects[effectName].fn({ intensity });
+          }
+        });
+      });
+    });
   </script>
 </body>
+
 </html>
