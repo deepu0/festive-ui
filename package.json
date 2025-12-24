@@ -1,7 +1,7 @@
 {
   "name": "festive-ui",
-  "version": "0.1.0",
-  "description": "Lightweight, production-safe seasonal UI effects. Starting with snow.",
+  "version": "2.0.0",
+  "description": "Lightweight particle effects library with 14 festive animations - zero GC, 60 FPS, <15KB gzipped",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -19,30 +19,49 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "size": "npm run build && gzip -c dist/index.esm.js | wc -c"
+    "size": "npm run build && gzip -c dist/index.esm.js | wc -c",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
-    "snow",
+    "particles",
     "effects",
-    "ui",
-    "seasonal",
-    "festive",
     "animation",
+    "festive",
+    "confetti",
+    "snow",
+    "fireworks",
+    "canvas",
+    "typescript",
     "react",
-    "css",
-    "particles"
+    "celebrations",
+    "seasonal",
+    "ui",
+    "performance",
+    "object-pooling",
+    "diwali",
+    "holi",
+    "christmas",
+    "new-year"
   ],
   "author": "Deepak Sharma",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/festive-ui"
+    "url": "https://github.com/deepu0/festive-ui"
   },
+  "bugs": {
+    "url": "https://github.com/deepu0/festive-ui/issues"
+  },
+  "homepage": "https://github.com/deepu0/festive-ui#readme",
+  "sideEffects": false,
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",

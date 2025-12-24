@@ -1,0 +1,39 @@
+# Build output
+dist/
+*.tgz
+
+# Development
+src/
+demo/
+examples/
+.gemini/
+tsconfig.json
+rollup.config.js
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+*.orig
+.env
+.env.local

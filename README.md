@@ -1,150 +1,322 @@
-# Festive UI
+# Festive UI v2.0 🎉
 
-> Lightweight, production-safe seasonal UI effects library with 14 amazing effects! 🎉
+> Lightweight, production-ready particle effects library with 14 stunning animations
 
-[![Bundle Size](https://img.shields.io/badge/bundle%20size-931%20bytes-success)](https://bundlephobia.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![NPM Version](https://img.shields.io/npm/v/festive-ui.svg)](https://www.npmjs.com/package/festive-ui)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/festive-ui.svg)](https://bundlephobia.com/package/festive-ui)
+[![License](https://img.shields.io/npm/l/festive-ui.svg)](https://github.com/yourusername/festive-ui/blob/main/LICENSE)
 
-## Features
+**Zero GC pressure • 60 FPS • <15KB gzipped • Full TypeScript support**
 
-✨ **Tiny** - Under 1kb gzipped  
-⚡️ **Fast** - Pure CSS animations, 60 FPS  
-♿️ **Accessible** - Respects `prefers-reduced-motion`  
-🔧 **Zero config** - Works out of the box  
-🌲 **Tree-shakable** - Import only what you need  
-🎯 **Framework agnostic** - Vanilla JS + React adapter  
+Perfect for celebrations, seasonal themes, and interactive experiences. Built with a production-grade particle effects engine featuring object pooling, performance monitoring, and accessibility support.
 
-## Installation
+## ✨ Features
+
+- 🎯 **14 Effects** across 3 categories (Original, General Festive, Indian Festivals)
+- 🚀 **Object Pooling** - Zero garbage collection during animation
+- 📊 **Performance Monitoring** - Real-time FPS tracking and auto-degradation
+- ♿ **Accessible** - Respects `prefers-reduced-motion`
+- 📦 **Tiny Bundle** - < 15KB gzipped
+- 🎨 **Framework Agnostic** - Works with vanilla JS, React, or any framework
+- 📱 **Mobile Optimized** - Automatic particle reduction
+- 💪 **TypeScript** - Full type definitions included
+
+## 📦 Installation
 
 ```bash
 npm install festive-ui
 ```
 
-## Available Effects (14 Total)
+```bash
+yarn add festive-ui
+```
 
-### Original Effects
-- ❄️ **Snow** - Gentle snowfall for winter themes
-- 🎉 **Confetti** - Celebratory bursts for achievements  
-- ❤️ **Hearts** - Romantic floating hearts
-- ✨ **Sparkles** - Magical twinkling effects
+```bash
+pnpm add festive-ui
+```
 
-### General Festive
-- 🎆 **Fireworks** - Explosive bursts for celebrations
-- 🍂 **Autumn Leaves** - Falling leaves for fall themes
-- 🎈 **Balloons** - Interactive floating balloons
-- ⭐ **Stars** - Twinkling starfield
-- 🫧 **Bubbles** - Floating bubbles with shimmer
-
-### Indian Festivals
-- 🎨 **Gulaal** - Holi colored powder bursts
-- 🪔 **Diyas** - Diwali oil lamps with flickering flames
-- 🌺 **Flower Shower** - Falling petals for celebrations
-- 🎇 **Chakri** - Spinning Diwali fireworks
-- 🏮 **Sky Lanterns** - Glowing floating lanterns
-
-## Quick Start
+## 🚀 Quick Start
 
 ### Vanilla JavaScript
 
 ```javascript
-import { snow, fireworks, gulaal, diyas } from 'festive-ui';
+import { snow } from 'festive-ui';
 
-// Start any effect
+// Start snow effect
 const cleanup = snow({ intensity: 'medium' });
 
-// Indian festival effects
-const holiCleanup = gulaal({ intensity: 'high' });
-const diwaliCleanup = diyas({ intensity: 'medium' });
-
-// Stop effects (cleanup)
+// Stop when done
 cleanup();
 ```
 
 ### React
 
 ```tsx
-import { SnowEffect, FireworksEffect, DiyasEffect } from 'festive-ui/react';
+import { useEffect } from 'react';
+import { confetti } from 'festive-ui';
 
-function App() {
-  return (
-    <>
-      <SnowEffect intensity="medium" />
-      <DiyasEffect intensity="low" />
-      {/* Your app content */}
-    </>
-  );
+function Celebration() {
+  useEffect(() => {
+    const cleanup = confetti({ intensity: 'high' });
+    return cleanup; // Cleanup on unmount
+  }, []);
+
+  return <div>🎉 Celebrating!</div>;
 }
 ```
 
-## Configuration
+### CDN (No Build Step)
+
+```html
+<script type="module">
+  import { snow } from 'https://cdn.jsdelivr.net/npm/festive-ui@2/dist/index.esm.js';
+  snow({ intensity: 'medium' });
+</script>
+```
+
+## 🎨 All 14 Effects
+
+### Original Effects (4)
+
+| Effect | Import | Description |
+|--------|--------|-------------|
+| ❄️ Snow | `snow` | Gentle snowfall with drift |
+| 🎉 Confetti | `confetti` | Celebratory bursts |
+| ❤️ Hearts | `hearts` | Floating hearts with sway |
+| ✨ Sparkles | `sparkles` | Twinkling stars |
+
+### General Festive (5)
+
+| Effect | Import | Description |
+|--------|--------|-------------|
+| 🎆 Fireworks | `fireworks` | Two-phase launch + burst |
+| 🍂 Autumn Leaves | `autumnLeaves` | Falling leaves |
+| 🎈 Balloons | `balloons` | Floating balloons |
+| ⭐ Stars | `stars` | Starfield background |
+| 🫧 Bubbles | `bubbles` | Floating bubbles |
+
+### Indian Festivals (5)
+
+| Effect | Import | Description |
+|--------|--------|-------------|
+| 🎨 Gulaal | `gulaal` | Holi colored powder |
+| 🪔 Diyas | `diyas` | Diwali oil lamps |
+| 🌺 Flower Shower | `flowerShower` | Falling petals |
+| 🎇 Chakri | `chakri` | Spinning fireworks |
+| 🏮 Sky Lanterns | `skyLanterns` | Floating lanterns |
+
+## 📖  API Reference
+
+### Basic Usage
+
+All effects follow the same API pattern:
+
+```typescript
+import { effectName } from 'festive-ui';
+
+const cleanup = effectName(options);
+// ... effect runs ...
+cleanup(); // Stop effect
+```
+
+### Configuration Options
+
+```typescript
+interface EffectOptions {
+  intensity?: 'off' | 'low' | 'medium' | 'high'; // Default: 'medium'
+  colors?: string[];                              // Custom colors
+  bounds?: DOMRect;                              // Containment bounds
+  duration?: number;                             // Duration in ms (for bursts)
+  zIndex?: number;                               // Canvas z-index
+  disableOnReducedMotion?: boolean;              // Default: true
+}
+```
+
+### Examples
 
 ```javascript
-snow({
-  intensity: 'medium',  // 'low' | 'medium' | 'high'
-  zIndex: 9999,
-  disableOnReducedMotion: true  // Respects accessibility
+// Custom intensity
+snow({ intensity: 'high' });
+
+// Custom colors
+confetti({ colors: ['#FF6B6B', '#4ECDC4', '#FFE66D'] });
+
+// Time-limited effect
+const cleanup = sparkles({ duration: 5000 });
+setTimeout(cleanup, 5000);
+
+// Multiple effects
+const cleanupSnow = snow({ intensity: 'low' });
+const cleanupConfetti = confetti({ intensity: 'medium' });
+```
+
+## 🎯 Advanced Usage
+
+### Using the Particle Engine Directly
+
+For maximum control and performance:
+
+```typescript
+import { ParticleEngine } from 'festive-ui';
+
+const engine = new ParticleEngine();
+engine.init(); // Creates shared canvas
+
+// Start multiple effects efficiently
+const snow = engine.start('snow', { intensity: 'medium' });
+const stars = engine.start('stars', { intensity: 'low' });
+
+// Monitor performance
+const metrics = engine.getMetrics();
+console.log(`FPS: ${metrics.fps}, Particles: ${metrics.particleCount}`);
+
+// Cleanup
+snow.stop();
+stars.stop();
+engine.destroy();
+```
+
+### Performance Monitoring
+
+```typescript
+import { ParticleEngine } from 'festive-ui';
+
+const engine = new ParticleEngine();
+engine.init();
+
+engine.on('performance', (metrics) => {
+  console.log(`FPS: ${metrics.fps}`);
+  console.log(`Frame Time: ${metrics.frameTime}ms`);
+  console.log(`Particles: ${metrics.particleCount}`);
 });
 ```
 
-### Intensity Levels
+## ⚡ Performance
 
-| Intensity | Particles | Best For |
-|-----------|-----------|----------|
-| `low` | 50 | Subtle background effect |
-| `medium` | 100 | Balanced visual impact |
-| `high` | 150 | Maximum wow factor |
+Festive UI v2.0 is built for production with these performance characteristics:
 
-## Browser Support
+- **Zero GC pressure** - Object pooling eliminates garbage collection during animation
+- **60 FPS sustained** - Maintains smooth 60fps with up to 100 particles
+- **< 15KB gzipped** - Tiny bundle size
+- **Auto-degradation** - Automatically reduces particle count if FPS drops
+- **Visibility API** - Pauses when tab is hidden
+- **Mobile optimized** - 50% particle reduction on mobile devices
 
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- All modern mobile browsers
+### Performance Budgets
 
-## Performance
+- Target frame time: < 8ms
+- Maximum frame time: 16ms (60 FPS)
+- Global particle cap: 100
+- Memory per effect: < 5MB
 
-- **Bundle size**: 931 bytes gzipped
-- **FPS**: Stable 60 FPS
-- **CLS**: 0 (no layout shifts)
-- **Memory**: < 5MB
-- Automatically pauses on tab blur
+## 🌐 Browser Support
 
-## Accessibility
+| Browser | Version |
+|---------|---------|
+| Chrome | 90+ |
+| Firefox | 88+ |
+| Safari | 14+ |
+| Edge | 90+ |
 
-✅ Automatically disabled when `prefers-reduced-motion` is set  
-✅ Non-interactive overlay (`pointer-events: none`)  
-✅ `aria-hidden` for screen readers  
-✅ No color contrast interference  
+## ♿ Accessibility
 
-## Demo
+Festive UI respects user preferences:
 
-The demo is already running at:
+- **Respects `prefers-reduced-motion`** - Automatically disables effects
+- **No layout shifts** - Effects don't affect page layout
+- **No focus interference** - Canvas has `pointer-events: none`
+- **Screen reader friendly** - Canvas is marked `aria-hidden="true"`
+
+## 📝 TypeScript
+
+Full TypeScript support with comprehensive type definitions:
+
+```typescript
+import { snow, type EffectOptions, type EffectInstance } from 'festive-ui';
+
+const options: EffectOptions = {
+  intensity: 'medium',
+  colors: ['#FFFFFF'],
+};
+
+const cleanup: () => void = snow(options);
 ```
-http://localhost:8080/demo
+
+## 🎭 React Integration
+
+### Hook Pattern
+
+```tsx
+import { useEffect } from 'react';
+import { snow } from 'festive-ui';
+
+function useSnow(intensity: 'low' | 'medium' | 'high') {
+  useEffect(() => {
+    const cleanup = snow({ intensity });
+    return cleanup;
+  }, [intensity]);
+}
+
+function App() {
+  useSnow('medium');
+  return <div>Winter Wonderland ❄️</div>;
+}
 ```
 
-Or start it manually:
-```bash
-npx serve
+### Conditional Effects
+
+```tsx
+function Celebration({ isActive }: { isActive: boolean }) {
+  useEffect(() => {
+    if (!isActive) return;
+    const cleanup = confetti({ intensity: 'high' });
+    return cleanup;
+  }, [isActive]);
+
+  return <button>Celebrate!</button>;
+}
 ```
 
-Visit the demo page to see all 14 effects in action!
+## 🎯 Use Cases
 
-## Roadmap
+- **Celebrations** - Birthdays, achievements, milestones
+- **Seasonal Themes** - Christmas, New Year, festivals
+- **Cultural Events** - Diwali, Holi, regional celebrations
+- **Interactive Experiences** - Gamification, rewards
+- **Marketing** - Product launches, announcements
+- **E-commerce** - Sale events, special offers
 
-- [x] Additional effects (confetti, hearts, sparkles) ✅
-- [x] General festive effects (fireworks, leaves, balloons, stars, bubbles) ✅
-- [x] Indian festival effects (gulaal, diyas, flowers, chakri, lanterns) ✅
-- [ ] Vue/Svelte adapters
-- [ ] SSR-ready Next.js examples
-- [ ] Date-based auto-triggers
+## 📚 Examples
 
-## License
+Check out the `/examples` directory for:
+- Basic vanilla JS usage
+- React integration patterns
+- TypeScript configuration
+- Advanced engine API
+- Performance optimization
+- Custom effect creation
 
-MIT © Deepak Sharma
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
+
+## 📜 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for version history and migration guides.
+
+## 📄 License
+
+MIT © [Deepak Sharma](https://github.com/deepu0)
 
 ---
 
-**Why festive-ui?**
+## 🔗 Links
 
-Most seasonal UI libraries are bloated (100kb+), lack accessibility, or cause performance issues. Festive UI is built for production - tiny, fast, and safe.
+- [NPM Package](https://www.npmjs.com/package/festive-ui)
+- [GitHub Repository](https://github.com/deepu0/festive-ui)
+- [Issue Tracker](https://github.com/deepu0/festive-ui/issues)
+- [Live Demo](https://festive-ui-demo.vercel.app) *(coming soon)*
+
+---
+
+**Made with ❤️ for the web**

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Snow - Festive UI</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #1a1a2e, #16213e);
+      color: white;
+    }
+    
+    button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background: #4ecdc4;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    button:hover {
+      background: #45b7aa;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <h1>❄️ Snow Effect Demo</h1>
+  <button id="toggleSnow">Start Snow</button>
+  
+  <script type="module">
+    // Import from CDN (no build step required!)
+    import { snow } from 'https://cdn.jsdelivr.net/npm/festive-ui@2/dist/index.esm.js';
+    
+    let cleanup = null;
+    const button = document.getElementById('toggleSnow');
+    
+    button.addEventListener('click', () => {
+      if (cleanup) {
+        // Stop snow
+        cleanup();
+        cleanup = null;
+        button.textContent = 'Start Snow';
+      } else {
+        // Start snow with medium intensity
+        cleanup = snow({ intensity: 'medium' });
+        button.textContent = 'Stop Snow';
+      }
+    });
+  </script>
+</body>
+</html>

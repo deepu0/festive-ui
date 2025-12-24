@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiple Effects - Festive UI</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 2rem;
+    }
+    
+    .controls {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    .effect-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .effect-btn {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .effect-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .effect-btn.active {
+      background: rgba(78, 205, 196, 0.3);
+      border-color: #4ecdc4;
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <h1>🎉 Multiple Effects Demo</h1>
+    <p>Click to toggle effects on/off</p>
+    
+    <div class="effect-grid">
+      <button class="effect-btn" data-effect="snow">❄️ Snow</button>
+      <button class="effect-btn" data-effect="confetti">🎉 Confetti</button>
+      <button class="effect-btn" data-effect="hearts">❤️ Hearts</button>
+      <button class="effect-btn" data-effect="sparkles">✨ Sparkles</button>
+      <button class="effect-btn" data-effect="fireworks">🎆 Fireworks</button>
+      <button class="effect-btn" data-effect="stars">⭐ Stars</button>
+    </div>
+  </div>
+  
+  <script type="module">
+    import {
+      snow, confetti, hearts, sparkles, fireworks, stars
+    } from 'https://cdn.jsdelivr.net/npm/festive-ui@2/dist/index.esm.js';
+    
+    const effects = {
+      snow: { fn: snow, cleanup: null },
+      confetti: { fn: confetti, cleanup: null },
+      hearts: { fn: hearts, cleanup: null },
+      sparkles: { fn: sparkles, cleanup: null },
+      fireworks: { fn: fireworks, cleanup: null },
+      stars: { fn: stars, cleanup: null },
+    };
+    
+    document.querySelectorAll('.effect-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const effectName = btn.dataset.effect;
+        const effect = effects[effectName];
+        
+        if (effect.cleanup) {
+          effect.cleanup();
+          effect.cleanup = null;
+          btn.classList.remove('active');
+        } else {
+          effect.cleanup = effect.fn({ intensity: 'medium' });
+          btn.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
