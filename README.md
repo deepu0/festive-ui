@@ -4,9 +4,9 @@
 
 [![NPM Version](https://img.shields.io/npm/v/festive-ui.svg)](https://www.npmjs.com/package/festive-ui)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/festive-ui.svg)](https://bundlephobia.com/package/festive-ui)
-[![License](https://img.shields.io/npm/l/festive-ui.svg)](https://github.com/yourusername/festive-ui/blob/main/LICENSE)
+[![License](https://img.shields.io/npm/l/festive-ui.svg)](https://github.com/deepu0/festive-ui/blob/main/LICENSE)
 
-**Zero GC pressure • 60 FPS • <15KB gzipped • Full TypeScript support**
+**Zero GC pressure • ~7KB gzipped core • 60 FPS budget • Full TypeScript support**
 
 Perfect for celebrations, seasonal themes, and interactive experiences. Built with a production-grade particle effects engine featuring object pooling, performance monitoring, and accessibility support.
 
@@ -16,7 +16,7 @@ Perfect for celebrations, seasonal themes, and interactive experiences. Built wi
 - 🚀 **Object Pooling** - Zero garbage collection during animation
 - 📊 **Performance Monitoring** - Real-time FPS tracking and auto-degradation
 - ♿ **Accessible** - Respects `prefers-reduced-motion`
-- 📦 **Tiny Bundle** - < 15KB gzipped
+- 📦 **Tiny Bundle** - ~7KB gzipped core (6.8KB, measured on the v2.0.0 npm tarball)
 - 🎨 **Framework Agnostic** - Works with vanilla JS, React, or any framework
 - 📱 **Mobile Optimized** - Automatic particle reduction
 - 💪 **TypeScript** - Full type definitions included
@@ -196,8 +196,8 @@ engine.on('performance', (metrics) => {
 Festive UI v2.0 is built for production with these performance characteristics:
 
 - **Zero GC pressure** - Object pooling eliminates garbage collection during animation
-- **60 FPS sustained** - Maintains smooth 60fps with up to 100 particles
-- **< 15KB gzipped** - Tiny bundle size
+- **60 FPS budget** - Global 100-particle cap and auto-degradation are designed to hold frame time under 16ms; verify on your target hardware with the built-in performance monitor (`engine.getMetrics()`)
+- **~7KB gzipped core** - `index.esm.js` from the v2.0.0 npm tarball is 30.3KB raw / 6.8KB gzipped (measured Sep 19, 2026; reproduce with `curl -sL $(npm view festive-ui dist.tarball) | tar xz && gzip -c package/dist/index.esm.js | wc -c`)
 - **Auto-degradation** - Automatically reduces particle count if FPS drops
 - **Visibility API** - Pauses when tab is hidden
 - **Mobile optimized** - 50% particle reduction on mobile devices
@@ -315,7 +315,7 @@ MIT © [Deepak Sharma](https://github.com/deepu0)
 - [NPM Package](https://www.npmjs.com/package/festive-ui)
 - [GitHub Repository](https://github.com/deepu0/festive-ui)
 - [Issue Tracker](https://github.com/deepu0/festive-ui/issues)
-- [Live Demo](https://festive-ui-demo.vercel.app) *(coming soon)*
+- Demo: no hosted demo yet — open [`demo/index.html`](demo/index.html) locally in a browser (no build step needed)
 
 ---
 
